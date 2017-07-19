@@ -42,8 +42,18 @@ namespace Abp
         {
             IocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
 
-            IocManager.Register<IScopedIocResolver, ScopedIocResolver>(DependencyLifeStyle.Transient);
-            IocManager.Register(typeof(IAmbientScopeProvider<>), typeof(DataContextAmbientScopeProvider<>), DependencyLifeStyle.Transient);
+            IocManager.IocContainer.Register(Component
+                .For<IScopedIocResolver, ScopedIocResolver>()
+                .ImplementedBy<ScopedIocResolver>()
+                .LifestyleTransient().OnlyNewServices());
+
+            IocManager.IocContainer.Register(Component
+                .For(typeof(IAmbientScopeProvider<>))
+                .ImplementedBy(typeof(DataContextAmbientScopeProvider<>))
+                .LifestyleTransient().OnlyNewServices());
+            
+            //IocManager.Register<IScopedIocResolver, ScopedIocResolver>(DependencyLifeStyle.Transient);
+            //IocManager.Register(typeof(IAmbientScopeProvider<>), typeof(DataContextAmbientScopeProvider<>), DependencyLifeStyle.Transient);
 
             InitializeInterceptors();
 
