@@ -118,9 +118,9 @@ namespace Abp
 
         private void AddUnitOfWorkFilters()
         {
-            Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.SoftDelete, true);
-            Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MustHaveTenant, true);
-            Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MayHaveTenant, true);
+            //Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.SoftDelete, true);
+            //Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MustHaveTenant, true);
+            //Configuration.UnitOfWork.RegisterFilter(AbpDataFilters.MayHaveTenant, true);
         }
 
         private void AddSettingProviders()

@@ -14,6 +14,7 @@ using Abp.Web.Mvc.Security.AntiForgery;
 using Abp.Web.Mvc.Uow;
 using Abp.Web.Mvc.Validation;
 using Abp.Web.Security.AntiForgery;
+using Castle.MicroKernel.Registration;
 
 namespace Abp.Web.Mvc
 {
@@ -28,7 +29,11 @@ namespace Abp.Web.Mvc
         {
             IocManager.AddConventionalRegistrar(new ControllerConventionalRegistrar());
 
-            IocManager.Register<IAbpMvcConfiguration, AbpMvcConfiguration>();
+            IocManager.IocContainer.Register(Component
+                .For<IAbpMvcConfiguration, AbpMvcConfiguration>()
+                .ImplementedBy<AbpMvcConfiguration>().OnlyNewServices());
+            
+            //IocManager.Register<IAbpMvcConfiguration, AbpMvcConfiguration>();
 
             Configuration.ReplaceService<IAbpAntiForgeryManager, AbpMvcAntiForgeryManager>();
         }

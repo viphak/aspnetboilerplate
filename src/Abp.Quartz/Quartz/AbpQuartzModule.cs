@@ -3,6 +3,7 @@ using Abp.Dependency;
 using Abp.Modules;
 using Abp.Quartz.Quartz.Configuration;
 using Abp.Threading.BackgroundWorkers;
+using Castle.MicroKernel.Registration;
 using Quartz;
 
 namespace Abp.Quartz.Quartz
@@ -12,7 +13,11 @@ namespace Abp.Quartz.Quartz
     {
         public override void PreInitialize()
         {
-            IocManager.Register<IAbpQuartzConfiguration, AbpQuartzConfiguration>();
+            IocManager.IocContainer.Register(Component
+                .For<IAbpQuartzConfiguration, AbpQuartzConfiguration>()
+                .ImplementedBy<AbpQuartzConfiguration>().OnlyNewServices());
+            
+            //IocManager.Register<IAbpQuartzConfiguration, AbpQuartzConfiguration>();
 
             Configuration.Modules.AbpQuartz().Scheduler.JobFactory = new AbpQuartzJobFactory(IocManager);
         }

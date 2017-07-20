@@ -11,6 +11,7 @@ using Abp.Web.Security.AntiForgery;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
 using Abp.Web.MultiTenancy;
+using Castle.MicroKernel.Registration;
 
 namespace Abp.Web
 {
@@ -23,9 +24,19 @@ namespace Abp.Web
         /// <inheritdoc/>
         public override void PreInitialize()
         {
-            IocManager.Register<IAbpAntiForgeryWebConfiguration, AbpAntiForgeryWebConfiguration>();
-            IocManager.Register<IAbpWebLocalizationConfiguration, AbpWebLocalizationConfiguration>();
-            IocManager.Register<IAbpWebModuleConfiguration, AbpWebModuleConfiguration>();
+            IocManager.IocContainer.Register(Component
+                .For<IAbpAntiForgeryWebConfiguration, AbpAntiForgeryWebConfiguration>()
+                .ImplementedBy<AbpAntiForgeryWebConfiguration>().OnlyNewServices());
+            IocManager.IocContainer.Register(Component
+                .For<IAbpWebLocalizationConfiguration, AbpWebLocalizationConfiguration>()
+                .ImplementedBy<AbpWebLocalizationConfiguration>().OnlyNewServices());
+            IocManager.IocContainer.Register(Component
+                .For<IAbpWebModuleConfiguration, AbpWebModuleConfiguration>()
+                .ImplementedBy<AbpWebModuleConfiguration>().OnlyNewServices());
+
+            //IocManager.Register<IAbpAntiForgeryWebConfiguration, AbpAntiForgeryWebConfiguration>();
+            //IocManager.Register<IAbpWebLocalizationConfiguration, AbpWebLocalizationConfiguration>();
+            //IocManager.Register<IAbpWebModuleConfiguration, AbpWebModuleConfiguration>();
             
             Configuration.ReplaceService<IPrincipalAccessor, HttpContextPrincipalAccessor>(DependencyLifeStyle.Transient);
             Configuration.ReplaceService<IClientInfoProvider, WebClientInfoProvider>(DependencyLifeStyle.Transient);
