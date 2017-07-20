@@ -15,14 +15,14 @@ namespace Abp.WebApi.OData.Configuration
         {
             ODataModelBuilder = new ODataConventionModelBuilder();
 
-//            MapAction = configuration =>
-//            {
-//                configuration.Modules.AbpWebApi().HttpConfiguration.MapODataServiceRoute(
-//                    routeName: "ODataRoute",
-//                    routePrefix: "odata",
-//                    model: configuration.Modules.AbpWebApiOData().ODataModelBuilder.GetEdmModel()
-//                );
-//            };
+            MapAction = configuration =>
+            {
+                configuration.Modules.AbpWebApi().HttpConfiguration.MapODataServiceRoute(
+                    routeName: "ODataRoute",
+                    routePrefix: "odata",
+                    model: configuration.Modules.AbpWebApiOData().ODataModelBuilder.GetEdmModel()
+                );
+            };
         }
     }
 }
