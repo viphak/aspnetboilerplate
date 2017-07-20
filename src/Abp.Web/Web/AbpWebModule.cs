@@ -38,8 +38,8 @@ namespace Abp.Web
             //IocManager.Register<IAbpWebLocalizationConfiguration, AbpWebLocalizationConfiguration>();
             //IocManager.Register<IAbpWebModuleConfiguration, AbpWebModuleConfiguration>();
             
-            Configuration.ReplaceService<IPrincipalAccessor, HttpContextPrincipalAccessor>(DependencyLifeStyle.Transient);
-            Configuration.ReplaceService<IClientInfoProvider, WebClientInfoProvider>(DependencyLifeStyle.Transient);
+            //Configuration.ReplaceService<IPrincipalAccessor, HttpContextPrincipalAccessor>(DependencyLifeStyle.Transient);
+            //Configuration.ReplaceService<IClientInfoProvider, WebClientInfoProvider>(DependencyLifeStyle.Transient);
 
             Configuration.MultiTenancy.Resolvers.Add<DomainTenantResolveContributor>();
             Configuration.MultiTenancy.Resolvers.Add<HttpHeaderTenantResolveContributor>();

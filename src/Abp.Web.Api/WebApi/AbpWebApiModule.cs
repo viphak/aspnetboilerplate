@@ -43,8 +43,14 @@ namespace Abp.WebApi
         {
             IocManager.AddConventionalRegistrar(new ApiControllerConventionalRegistrar());
 
-            IocManager.Register<IDynamicApiControllerBuilder, DynamicApiControllerBuilder>();
-            IocManager.Register<IAbpWebApiConfiguration, AbpWebApiConfiguration>();
+            IocManager.IocContainer.Register(Component
+                .For<IDynamicApiControllerBuilder, DynamicApiControllerBuilder>()
+                .ImplementedBy<DynamicApiControllerBuilder>().OnlyNewServices());
+            IocManager.IocContainer.Register(Component
+                .For<IAbpWebApiConfiguration, AbpWebApiConfiguration>()
+                .ImplementedBy<AbpWebApiConfiguration>().OnlyNewServices());            
+            //IocManager.Register<IDynamicApiControllerBuilder, DynamicApiControllerBuilder>();
+            //IocManager.Register<IAbpWebApiConfiguration, AbpWebApiConfiguration>();
 
             Configuration.Settings.Providers.Add<ClearCacheSettingProvider>();
 

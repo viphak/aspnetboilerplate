@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Abp.Modules;
+using Castle.MicroKernel.Registration;
 
 namespace Abp.Runtime.Caching.Redis
 {
@@ -11,7 +12,11 @@ namespace Abp.Runtime.Caching.Redis
     {
         public override void PreInitialize()
         {
-            IocManager.Register<AbpRedisCacheOptions>();
+            IocManager.IocContainer.Register(Component
+                .For<AbpRedisCacheOptions>()
+                .ImplementedBy<AbpRedisCacheOptions>().OnlyNewServices());
+            
+            //IocManager.Register<AbpRedisCacheOptions>();
         }
 
         public override void Initialize()

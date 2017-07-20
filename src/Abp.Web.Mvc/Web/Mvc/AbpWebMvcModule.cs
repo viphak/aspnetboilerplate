@@ -35,7 +35,7 @@ namespace Abp.Web.Mvc
             
             //IocManager.Register<IAbpMvcConfiguration, AbpMvcConfiguration>();
 
-            Configuration.ReplaceService<IAbpAntiForgeryManager, AbpMvcAntiForgeryManager>();
+            //Configuration.ReplaceService<IAbpAntiForgeryManager, AbpMvcAntiForgeryManager>();
         }
 
         /// <inheritdoc/>

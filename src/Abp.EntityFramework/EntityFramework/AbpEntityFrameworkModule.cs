@@ -38,6 +38,7 @@ namespace Abp.EntityFramework
                     .For<IUnitOfWorkFilterExecuter, IEfUnitOfWorkFilterExecuter>()
                     .ImplementedBy<EfDynamicFiltersUnitOfWorkFilterExecuter>()
                     .LifestyleTransient()
+                    .OnlyNewServices()
                 );
             });
         }
@@ -50,6 +51,7 @@ namespace Abp.EntityFramework
                 Component.For(typeof(IDbContextProvider<>))
                     .ImplementedBy(typeof(UnitOfWorkDbContextProvider<>))
                     .LifestyleTransient()
+                    .OnlyNewServices()
                 );
 
             RegisterGenericRepositoriesAndMatchDbContexes();

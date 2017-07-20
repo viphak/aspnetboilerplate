@@ -24,9 +24,13 @@ namespace Abp.AutoMapper
 
         public override void PreInitialize()
         {
-            IocManager.Register<IAbpAutoMapperConfiguration, AbpAutoMapperConfiguration>();
+            IocManager.IocContainer.Register(Component
+                .For<IAbpAutoMapperConfiguration, AbpAutoMapperConfiguration>()
+                .ImplementedBy<AbpAutoMapperConfiguration>().OnlyNewServices());
 
-            Configuration.ReplaceService<ObjectMapping.IObjectMapper, AutoMapperObjectMapper>();
+            //IocManager.Register<IAbpAutoMapperConfiguration, AbpAutoMapperConfiguration>();
+
+            //Configuration.ReplaceService<ObjectMapping.IObjectMapper, AutoMapperObjectMapper>();
 
             Configuration.Modules.AbpAutoMapper().Configurators.Add(CreateCoreMappings);
         }

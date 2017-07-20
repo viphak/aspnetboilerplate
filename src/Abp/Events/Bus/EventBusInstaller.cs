@@ -29,13 +29,13 @@ namespace Abp.Events.Bus
             if (_eventBusConfiguration.UseDefaultEventBus)
             {
                 container.Register(
-                    Component.For<IEventBus>().UsingFactoryMethod(() => EventBus.Default).LifestyleSingleton()
+                    Component.For<IEventBus>().UsingFactoryMethod(() => EventBus.Default).LifestyleSingleton().OnlyNewServices()
                     );
             }
             else
             {
                 container.Register(
-                    Component.For<IEventBus>().ImplementedBy<EventBus>().LifestyleSingleton()
+                    Component.For<IEventBus>().ImplementedBy<EventBus>().LifestyleSingleton().OnlyNewServices()
                     );
             }
 
